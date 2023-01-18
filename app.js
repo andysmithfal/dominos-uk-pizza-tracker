@@ -24,6 +24,8 @@ function statusLookup(orderStatus){
     switch(orderStatus.statusId){
         case 3: 
             return "Delivered"
+        case 7: 
+            return "Prep"
         case 5:
             return "Baking"
         case 8: 
