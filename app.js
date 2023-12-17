@@ -1,4 +1,3 @@
-const axios = require('axios');
 const { program } = require('commander');
 
 program
@@ -38,8 +37,11 @@ function statusLookup(orderStatus){
 }
 
 async function getOrderStatus(){
-    const response = await axios.get('https://www.dominos.co.uk/pizzaTracker/getOrderDetails?id='+orderId);
-    return response.data
+    const url = 'https://www.dominos.co.uk/pizzaTracker/api/orderstatus?id='+orderId;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+    
 }
 async function update(){
     orderStatus = await getOrderStatus()
@@ -52,7 +54,7 @@ async function main(){
     try{
         orderId = verifyAndExtractOrderId(options.url)
     } catch(e) {
-        console.log(e)
+        // console.log(e)
         return
     }
     i = await getOrderStatus()
